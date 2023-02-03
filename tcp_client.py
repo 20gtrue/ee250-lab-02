@@ -10,28 +10,26 @@ import socket
 def main():
     # TODO: Create a socket and connect it to the server at the designated IP and port
 
-    import socket
 
-    HOST = "172.20.10.4"  # The server's hostname or IP address
+    HOST = "172.20.10.5"  # The server's hostname or IP address
     PORT = 10000  # The port used by the server
 
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-    s.connect((HOST, PORT))
-    
+        s.connect((HOST, PORT))
     # TODO: Get user input and send it to the server using your TCP socket
-    u_in = input('Enter something fun!\n') 
+        u_in = input('Enter something fun!\n') 
 
     #for i in bytearray(u_in, 'ascii'):
        # s.sendall(i)
 
-    s.sendall(bytes(u_in))
-
+        s.send(u_in.encode())
+        data = s.recv(256)
     # TODO: Receive a response from the server and close the TCP connection
     pass
 
-    data = s.recv(1024)
 
-    print(f"Received {data!r}")
+
+    print(data.decode())
 
 
 if __name__ == '__main__':
